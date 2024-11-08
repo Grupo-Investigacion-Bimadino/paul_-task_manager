@@ -5,22 +5,89 @@ import { UpdateTareaDto } from './dto/update-tarea.dto';
 @Injectable()
 export class TareasService {
   create(createTareaDto: CreateTareaDto) {
-    return 'This action adds a new tarea';
+    return createTareaDto;
   }
 
   findAll() {
-    return `This action returns all tareas`;
+    return [ 
+      
+      {
+      id: 1, 
+      Titulo: 'La vaca lola', 
+      Nombre: 'Duvan Ruiz', 
+      Ruta: 'download/documentos', 
+      Descripción: 'la aca lola tiene cabeza y tiene cola', 
+      Fecha_creación: '08/11/2024', 
+      Fecha_vencimiento: '08/11/2024', 
+      id_equipo: '123', 
+      Prioridad: 'alta', 
+      Etiqueta: 'realizar rapido', 
+      Estado: 'no empezado', 
+      IDArchivo: "3421",
+      },
+
+      {
+        id: 2, 
+        Titulo: 'Arroz de coco', 
+        Nombre: 'Armadores de arroz', 
+        Ruta: 'download/documentos', 
+        Descripción: 'como se hace el arroz de coco', 
+        Fecha_creación: '08/11/2024', 
+        Fecha_vencimiento: '08/11/2024', 
+        id_equipo: '123', 
+        Prioridad: 'alta', 
+        Etiqueta: 'realizar rapido', 
+        Estado: 'no empezado', 
+        IDArchivo: "3421",
+        },
+        {
+        id: 3, 
+        Titulo: 'Arroz de aceite', 
+        Nombre: 'Armadores de arroz', 
+        Ruta: 'download/documentos', 
+        Descripción: 'como se hace el arroz de aceite', 
+        Fecha_creación: '08/11/2024', 
+        Fecha_vencimiento: '08/11/2024', 
+        id_equipo: '123', 
+        Prioridad: 'alta', 
+        Etiqueta: 'realizar rapido', 
+        Estado: 'no empezado', 
+        IDArchivo: "3421",
+
+          }
+
+      ];
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} tarea`;
+    return {
+      
+        id: 2, 
+        Titulo: 'Arroz de coco', 
+        Nombre: 'Armadores de arroz', 
+        Ruta: 'download/documentos', 
+        Descripción: 'como se hace el arroz de coco', 
+        Fecha_creación: '08/11/2024', 
+        Fecha_vencimiento: '08/11/2024', 
+        id_equipo: '123', 
+        Prioridad: 'alta', 
+        Etiqueta: 'realizar rapido', 
+        Estado: 'no empezado', 
+        IDArchivo: "3421",
+        
+    };
   }
 
   update(id: number, updateTareaDto: UpdateTareaDto) {
-    return `This action updates a #${id} tarea`;
+    return {
+      id, 
+      updateTareaDto
+    };
   }
 
   remove(id: number) {
-    return `This action removes a #${id} tarea`;
+    return {
+      id,
+    };
   }
 }

@@ -4,22 +4,13 @@ import { Document } from 'mongoose';
 @Schema({ timestamps: true })
 export class comentarios extends Document {
   @Prop()
-  content: string;
+  fecha_creacion: string;
 
   @Prop()
-  senderId: string;
+  texto_comentario: string;
 
   @Prop()
-  author: string;
-
-  @Prop()
-  avatar: string;
-
-  @Prop()
-  roomId: string;
-
-  @Prop()
-  ownerId: string;
+  estado: string;
 
   @Prop({ default: () => new Date() })
   timestamp: Date;

@@ -5,37 +5,19 @@ import { Timestamp } from 'rxjs';
 @Schema({ timestamps: true })
 export class acciones extends Document {
   @Prop()
-  titulo: string;
+  fecha_accion: string;
 
   @Prop()
-  nombre: string;
+  accion: string;
 
   @Prop()
-  ruta: string;
+  motivo_accion: string;
 
   @Prop()
-  descripcion: string;
-
-  @Prop()
-  fecha_creacion: string;
-
-  @Prop({ default: () => new Date() })
-  fecha_vencimiento: Date;
+  estado_posterior: string;
 
   @Prop({ default: () => new Date() })
   timestamp: Date;
-
-  @Prop()
-  IDequipo: string;
-
-  @Prop()
-  prioridad: string;
-
-  @Prop()
-  estado: string;
-
-  @Prop()
-  IDarchivo: string;
-}
+  }
 
 export const MessageSchema = SchemaFactory.createForClass(acciones);

@@ -5,22 +5,56 @@ import { UpdateComentarioDto } from './dto/update-comentario.dto';
 @Injectable()
 export class ComentariosService {
   create(createComentarioDto: CreateComentarioDto) {
-    return 'This action adds a new comentario';
+    return createComentarioDto;
   }
 
   findAll() {
-    return `This action returns all comentarios`;
+    return [
+      {
+        id:1,
+        texto:'debe mejorar la redaccion de sus respuestas',
+        fecha_creacion:'08/11/2025',
+        estado:'comentado',
+
+      },
+      {
+        id:2,
+        texto:'anexe el archivo pedido',
+        fecha_creacion:'08/11/2025',
+        estado:'comentado',
+        
+      },
+      {
+        id:3,
+        texto:'el arroz de coco quedó salado',
+        fecha_creacion:'08/11/2025',
+        estado:'comentado',
+        
+      }
+    ];
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} comentario`;
+    return [
+      {
+          id:1,
+          texto:'debe mejorar la redaccion de sus respuestas',
+          fecha_creacion:'08/11/2025',
+          estado:'comentado',
+      }
+    ];
   }
 
   update(id: number, updateComentarioDto: UpdateComentarioDto) {
-    return `This action updates a #${id} comentario`;
+    return {
+      id,
+      updateComentarioDto
+    };
   }
 
   remove(id: number) {
-    return `This action removes a #${id} comentario`;
+    return {
+      id,
+    };
   }
 }

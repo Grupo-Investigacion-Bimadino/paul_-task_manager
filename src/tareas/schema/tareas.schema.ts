@@ -4,25 +4,39 @@ import { Document } from 'mongoose';
 @Schema({ timestamps: true })
 export class tareas extends Document {
   @Prop()
-  content: string;
+  titulo: string;
 
   @Prop()
-  senderId: string;
+  nombre: string;
 
   @Prop()
-  author: string;
+  ruta: string;
 
   @Prop()
-  avatar: string;
+  descripcion: string;
 
   @Prop()
-  roomId: string;
+  fecha_creacion: string;
 
-  @Prop()
-  ownerId: string;
+  @Prop({ default: () => new Date() })
+  fecha_vencimiento: Date;
 
   @Prop({ default: () => new Date() })
   timestamp: Date;
+
+  @Prop()
+  IDequipo: string;
+
+  @Prop()
+  prioridad: string;
+
+  @Prop()
+  estado: string;
+
+  @Prop()
+  IDarchivo: string;
+
+ 
 }
 
 export const MessageSchema = SchemaFactory.createForClass(tareas);
