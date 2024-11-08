@@ -3,8 +3,11 @@ import { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class archivos extends Document {
+
+ 
+
   @Prop()
-  nombre: string;
+  name: string;
 
   @Prop()
   formato: string;
@@ -13,10 +16,10 @@ export class archivos extends Document {
   url: string;
 
   @Prop()
-  peso: string;
+  peso: number;
 
   @Prop()
-  IDtareas: string;
+  IDtareas: number;
 
   @Prop({ default: () => new Date() })
   timestamp: Date;
