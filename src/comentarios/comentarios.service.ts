@@ -1,60 +1,51 @@
 import { Injectable } from '@nestjs/common';
 import { CreateComentarioDto } from './dto/create-comentario.dto';
 import { UpdateComentarioDto } from './dto/update-comentario.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { comentarios } from './schema/comentarios.shema'
 
 @Injectable()
 export class ComentariosService {
-  create(createComentarioDto: CreateComentarioDto) {
-    return createComentarioDto;
+  constructor(@InjectModel(comentarios.name) private COMENTARIOSModel: Model<comentarios>) {}
+  async create(createComentarioDto: CreateComentarioDto) {
+
+    const createcomentario =  new this.COMENTARIOSModel (createComentarioDto)
+
+    const result = await createcomentario.save();
+    
+    return result; 
+    
   }
 
   findAll() {
-    return [
-      {
-        id:1,
-        texto:'debe mejorar la redaccion de sus respuestas',
-        fecha_creacion:'08/11/2025',
-        estado:'comentado',
-
-      },
-      {
-        id:2,
-        texto:'anexe el archivo pedido',
-        fecha_creacion:'08/11/2025',
-        estado:'comentado',
-        
-      },
-      {
-        id:3,
-        texto:'el arroz de coco quedó salado',
-        fecha_creacion:'08/11/2025',
-        estado:'comentado',
-        
-      }
-    ];
+    return this.COMENTARIOSModel.find();
   }
 
-  findOne(id: number) {
-    return [
-      {
-          id:1,
-          texto:'debe mejorar la redaccion de sus respuestas',
-          fecha_creacion:'08/11/2025',
-          estado:'comentado',
-      }
-    ];
+  findOne(id: string) {
+      return this.COMENTARIOSModel
+    .findById(id)
   }
 
-  update(id: number, updateComentarioDto: UpdateComentarioDto) {
-    return {
-      id,
-      updateComentarioDto
-    };
+  async update(id: String, updateComentarioDto: UpdateComentarioDto) {
+    try {
+      const updatedComentario = await this.COMENTARIOSModel.findByIdAndUpdate(
+        id,
+        updateComentarioDto,
+        { new:true } );
+
+      return updatedComentario;
+    }
+    finally{
+      console.log('actualización finalizada.');
+    }
   }
 
-  remove(id: number) {
-    return {
-      id,
-    };
+  async remove(id: string) {
+    try {
+      const deletedComentario = await this.COMENTARIOSModel.findByIdAndDelete(id);
+      return deletedComentario;
+    }
+    finally{}
   }
 }

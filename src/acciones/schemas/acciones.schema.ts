@@ -1,11 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Timestamp } from 'rxjs';
 
 @Schema({ timestamps: true })
 export class acciones extends Document {
-  @Prop()
-  fecha_accion: string;
+  @Prop({ default: () => new Date() })
+  fecha_accion: Date;
 
   @Prop()
   accion: string;
@@ -15,9 +14,6 @@ export class acciones extends Document {
 
   @Prop()
   estado_posterior: string;
-
-  @Prop({ default: () => new Date() })
-  timestamp: Date;
   }
 
 export const MessageSchema = SchemaFactory.createForClass(acciones);

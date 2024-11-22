@@ -2,7 +2,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
-export class tareas extends Document {
+export class Tareas extends Document {
+ 
   @Prop()
   titulo: string;
 
@@ -15,15 +16,12 @@ export class tareas extends Document {
   @Prop()
   descripcion: string;
 
-  @Prop()
-  fecha_creacion: string;
+  @Prop({ default: () => new Date() })
+  fecha_creacion: Date;
 
   @Prop({ default: () => new Date() })
   fecha_vencimiento: Date;
-
-  @Prop({ default: () => new Date() })
-  timestamp: Date;
-
+  
   @Prop()
   IDequipo: string;
 
@@ -36,7 +34,10 @@ export class tareas extends Document {
   @Prop()
   IDarchivo: string;
 
+  @Prop()
+  etiqueta: string;
+
  
 }
 
-export const MessageSchema = SchemaFactory.createForClass(tareas);
+export const TareasSchema = SchemaFactory.createForClass(Tareas);

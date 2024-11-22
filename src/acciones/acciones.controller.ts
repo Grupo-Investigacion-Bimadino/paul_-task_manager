@@ -19,16 +19,16 @@ export class AccionesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.accionesService.findOne(+id);
+    return this.accionesService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAccioneDto: UpdateAccioneDto) {
-    return this.accionesService.update(+id, updateAccioneDto);
+    return this.accionesService.update(id, updateAccioneDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.accionesService.remove(+id);
+    return this.accionesService.remove(id);
   }
 }

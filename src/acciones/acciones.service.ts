@@ -1,64 +1,49 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAccioneDto } from './dto/create-accione.dto';
 import { UpdateAccioneDto } from './dto/update-accione.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { acciones } from './schemas/acciones.schema'
 
 @Injectable()
 export class AccionesService {
-  create(createAccioneDto: CreateAccioneDto) {
-    return createAccioneDto;
+  constructor(@InjectModel(acciones.name) private ACCIONESModel: Model<acciones>) {}
+  async create(createAccioneDto: CreateAccioneDto) {
+    const createAccione = new this.ACCIONESModel (createAccioneDto)
+    const result = await createAccione.save();
+    return result; 
+    
 
   }
 
   findAll() {
-    return [
-      {
-        id:1,
-        fecha_accion:'08/11/2024',
-        accion:'eliminar',
-        motivo_accion:'mal hecho',
-        estado_posterior:'eliminado',
-      },
-      {
-        id:2,
-        fecha_accion:'08/11/2024',
-        accion:'editar',
-        motivo_accion:'faltan definiciones',
-        estado_posterior:'listo para corregir',
-      },
-      {
-        id:3,
-        fecha_accion:'08/11/2025',
-        accion:'',
-        motivo_accion:'mal hecho',
-        estado_posterior:'eliminado',
-      },
-
-    ]
+    return this.ACCIONESModel.find();
   }
 
-  findOne(id: number) {
-    return [
-       {
-        id:3,
-        fecha_accion:'08/11/2025',
-        accion:'',
-        motivo_accion:'mal hecho',
-        estado_posterior:'eliminado',
-       } 
-
-    ];
+  findOne(id: string) {
+    return this.ACCIONESModel
+    .findById(id); 
   }
 
-  update(id: number, updateAccioneDto: UpdateAccioneDto) {
-    return {
-      id,
-      updateAccioneDto
-    };
+  async update(id: string, updateAccioneDto: UpdateAccioneDto) {
+    try {
+      const updatedAcciones = await this.ACCIONESModel.findByIdAndUpdate(
+        id,
+        updateAccioneDto,
+        { new:true } );
+
+      return updatedAcciones;
+    }
+    finally{
+      console.log('actualización finalizada.');
+    }
   }
 
-  remove(id: number) {
-    return {
-      id,
-    };
+  async remove(id: string) {
+    try {
+      const deletedAcciones = await this.ACCIONESModel.findByIdAndDelete(id);
+      return deletedAcciones;
+    }
+    finally{}
   }
 }

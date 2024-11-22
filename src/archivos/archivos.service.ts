@@ -1,56 +1,52 @@
 import { Injectable } from '@nestjs/common';
 import { CreateArchivoDto } from './dto/create-archivo.dto';
 import { UpdateArchivoDto } from './dto/update-archivo.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { archivos } from './schemas/archivos.schema'
 
 @Injectable()
 export class ArchivosService {
-  create(createArchivoDto: CreateArchivoDto) {
-    return createArchivoDto;
+  constructor(@InjectModel(archivos.name) private ARCHIVOSModel: Model<archivos>) {}
+  async create(createArchivoDto: CreateArchivoDto) {
+
+    const createarchivo = new this.ARCHIVOSModel (createArchivoDto)
+
+    const result = await createarchivo.save();
+
+    return result; 
+    
   }
 
   findAll() {
-    return [
-      {
-        id: 1, 
-        formato: 'pdf',
-        name: 'diagrama', 
-        url: 'yandex.com/binarios', 
-        peso: '10mb', 
-      },
-      {
-        id: 2, 
-        formato: 'pdf',
-        name: 'casos de uso', 
-        url: 'yandex.com/casos_de_uso', 
-        peso: '10mb', 
-      },
-      {
-        id: 3, 
-        formato: 'pdf',
-        name: 'diagramas', 
-        url: 'yandex.com/diagramas', 
-        peso: '10mb', 
-      }
-    ];
+    return this.ARCHIVOSModel.find();
   }
 
-  findOne(id: number) {
-    return [
-      {
-        id: 1, 
-        formato: 'pdf',
-        name: 'diagrama', 
-        url: 'yandex.com/binarios', 
-        peso: '10mb', 
-      }
-    ];
+  findOne(id: String) {
+    return this.ARCHIVOSModel
+    .findById(id)
   }
 
-  update(id: number, updateArchivoDto: UpdateArchivoDto) {
-    return [ id, updateArchivoDto, ];
+  async update(id: string, updateArchivoDto: UpdateArchivoDto) {
+    try {
+      const updatedArchivo = await this.ARCHIVOSModel.findByIdAndUpdate(
+        id,
+         updateArchivoDto,
+        { new:true } );
+
+      return updatedArchivo;
+    }
+    finally{
+      console.log('actualización finalizada.');
+    }
   }
 
-  remove(id: number) {
-    return [ id, ];
+  async remove(id: string) {
+    try {
+      const deletedArchivo = await this.ARCHIVOSModel.findByIdAndDelete(id);
+      return deletedArchivo;
+    }
+    finally{}
   }
-}
+  }
+

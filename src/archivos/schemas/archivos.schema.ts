@@ -22,7 +22,7 @@ export class archivos extends Document {
   IDtareas: number;
 
   @Prop({ default: () => new Date() })
-  timestamp: Date;
+  fecha_subido: Date;
 }
 
-export const MessageSchema = SchemaFactory.createForClass(archivos);
+export const archivosSchema = SchemaFactory.createForClass(archivos);
