@@ -36,6 +36,9 @@ export class ArchivosService {
 
       return updatedArchivo;
     }
+    catch (e) {
+      console.error(e)
+    }
     finally{
       console.log('actualización finalizada.');
     }

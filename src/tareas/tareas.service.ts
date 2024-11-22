@@ -38,6 +38,9 @@ export class TareasService {
 
       return updatedTarea;
     }
+    catch (e) {
+      console.error(e)
+    }
     finally{
       console.log('actualización finalizada.');
     }

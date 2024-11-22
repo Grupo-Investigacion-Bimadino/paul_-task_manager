@@ -36,6 +36,9 @@ export class ComentariosService {
 
       return updatedComentario;
     }
+    catch (e) {
+      console.error(e)
+    }
     finally{
       console.log('actualización finalizada.');
     }

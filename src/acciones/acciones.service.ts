@@ -12,10 +12,7 @@ export class AccionesService {
     const createAccione = new this.ACCIONESModel (createAccioneDto)
     const result = await createAccione.save();
     return result; 
-    
-
   }
-
   findAll() {
     return this.ACCIONESModel.find();
   }
@@ -33,6 +30,9 @@ export class AccionesService {
         { new:true } );
 
       return updatedAcciones;
+    }
+    catch (e) {
+      console.error(e)
     }
     finally{
       console.log('actualización finalizada.');
