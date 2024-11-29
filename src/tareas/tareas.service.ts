@@ -45,8 +45,6 @@ export class TareasService {
       console.log('actualización finalizada.');
     }
   }
-
-
   async remove(id: string) {
     
     try {
